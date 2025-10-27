@@ -6,22 +6,22 @@ document.addEventListener("DOMContentLoaded", () => {
     "1F-A": { x: 100, y: 80, floor: 1, connects: ["1F-B", "Stair1F-1"] },
     "1F-B": { x: 250, y: 80, floor: 1, connects: ["1F-A", "1F-C"] },
     "1F-C": { x: 400, y: 80, floor: 1, connects: ["1F-B", "Stair1F-2"] },
-    "Stair1F-1": { x: 180, y: 150, floor: 1, connects: ["1F-A", "Stair2F-1"] },
-    "Stair1F-2": { x: 320, y: 150, floor: 1, connects: ["1F-C", "Stair2F-2"] },
+    "Stair1F-1": { x: 100, y: 150, floor: 1, connects: ["1F-A", "Stair2F-1"] },
+    "Stair1F-2": { x: 400, y: 150, floor: 1, connects: ["1F-C", "Stair2F-2"] },
 
     // 2F
     "2F-A": { x: 100, y: 80, floor: 2, connects: ["2F-B", "Stair2F-1"] },
     "2F-B": { x: 250, y: 80, floor: 2, connects: ["2F-A", "2F-C"] },
     "2F-C": { x: 400, y: 80, floor: 2, connects: ["2F-B", "Stair2F-2"] },
-    "Stair2F-1": { x: 180, y: 150, floor: 2, connects: ["2F-A", "Stair1F-1", "Stair3F-1"] },
-    "Stair2F-2": { x: 320, y: 150, floor: 2, connects: ["2F-C", "Stair1F-2", "Stair3F-2"] },
+    "Stair2F-1": { x: 100, y: 150, floor: 2, connects: ["2F-A", "Stair1F-1", "Stair3F-1"] },
+    "Stair2F-2": { x: 400, y: 150, floor: 2, connects: ["2F-C", "Stair1F-2", "Stair3F-2"] },
 
     // 3F
     "3F-A": { x: 100, y: 80, floor: 3, connects: ["3F-B", "Stair3F-1"] },
     "3F-B": { x: 250, y: 80, floor: 3, connects: ["3F-A", "3F-C"] },
     "3F-C": { x: 400, y: 80, floor: 3, connects: ["3F-B", "Stair3F-2"] },
-    "Stair3F-1": { x: 180, y: 150, floor: 3, connects: ["3F-A", "Stair2F-1"] },
-    "Stair3F-2": { x: 320, y: 150, floor: 3, connects: ["3F-C", "Stair2F-2"] },
+    "Stair3F-1": { x: 100, y: 150, floor: 3, connects: ["3F-A", "Stair2F-1"] },
+    "Stair3F-2": { x: 400, y: 150, floor: 3, connects: ["3F-C", "Stair2F-2"] },
   };
 
   // --- HTML要素 ---
@@ -322,3 +322,4 @@ document.addEventListener("DOMContentLoaded", () => {
   setCanvasInitialSize();
   drawMap();
 });
+
