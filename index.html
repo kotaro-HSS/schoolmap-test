@@ -1,133 +1,39 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Uminomori Map</title>
-<style>
-  body {
-    margin: 0;
-    padding: 0;
-    background: #f7f9fb;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-family: "Segoe UI", sans-serif;
-  }
-
-  h1 {
-    font-size: 1.2rem;
-    margin-top: 12px;
-    color: #333;
-  }
-
-  canvas {
-    border: 2px solid #333;
-    border-radius: 12px;
-    margin: 12px auto;
-    display: block;
-    background: white;
-    width: 95vw;       /* ← スマホ画面に合わせて自動調整 */
-    height: auto;
-    touch-action: none; /* ← スワイプで動作が乱れないように */
-  }
-
-  #info {
-    font-size: 0.9rem;
-    color: #555;
-    text-align: center;
-    margin-bottom: 20px;
-  }
-</style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>校内マップ（モバイル対応）</title>
+<link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>海の森高校 フロアマップ（アクソメ風）</h1>
-  <canvas id="mapCanvas"></canvas>
-  <div id="info">タップ・ピンチで拡大できます（実験中）</div>
+  <header>
+    <h1>校内マップナビ</h1>
+  </header>
 
-  <script>
-    const canvas = document.getElementById("mapCanvas");
-    const ctx = canvas.getContext("2d");
+  <main>
+    <section class="controls">
+      <div class="row">
+        <label for="start">現在地</label>
+        <select id="start"></select>
+      </div>
+      <div class="row">
+        <label for="end">目的地</label>
+        <select id="end"></select>
+      </div>
+      <button id="find-route">経路を表示</button>
+      <div id="result" class="result-box"></div>
+    </section>
 
-    // スマホ画面に合わせたサイズ調整
-    const scaleFactor = Math.min(window.innerWidth / 500, 1);
-    canvas.width = 500 * scaleFactor;
-    canvas.height = 600 * scaleFactor;
-    ctx.scale(scaleFactor, scaleFactor);
+    <section class="map-wrap">
+      <canvas id="mapCanvas"></canvas>
+    </section>
+  </main>
 
-    // フロア情報（各階を平行四辺形として配置）
-    const floors = [
-      { y: 400, color: "#f8f8ff", label: "1F" },
-      { y: 250, color: "#f0f0ff", label: "2F" },
-      { y: 100, color: "#e8e8ff", label: "3F" }
-    ];
+  <footer>
+    <small>© 校内マップシステム</small>
+  </footer>
 
-    // 平行四辺形を描画する関数
-    function drawFloor(x, y, w, h, color, label) {
-      const skew = 60; // 傾き角度
-      const offset = 60;
-      ctx.beginPath();
-      ctx.moveTo(x + offset, y);
-      ctx.lineTo(x + w + offset, y - skew);
-      ctx.lineTo(x + w, y + h - skew);
-      ctx.lineTo(x, y + h);
-      ctx.closePath();
-      ctx.fillStyle = color;
-      ctx.fill();
-      ctx.strokeStyle = "#666";
-      ctx.stroke();
-      ctx.fillStyle = "#333";
-      ctx.font = "bold 16px sans-serif";
-      ctx.fillText(label, x + w / 2, y + h / 2);
-    }
-
-    // 各階のノード（部屋や階段の位置）
-    const nodes = {
-      "1F": { A: [160, 460], Stair: [220, 420] },
-      "2F": { B: [220, 320], Stair: [220, 280] },
-      "3F": { C: [280, 180], Stair: [220, 140] }
-    };
-
-    // 描画
-    function drawMap() {
-      ctx.clearRect(0, 0, canvas.width / scaleFactor, canvas.height / scaleFactor);
-      ctx.lineWidth = 2;
-
-      // フロアを描く
-      for (const f of floors) {
-        drawFloor(100, f.y, 260, 100, f.color, f.label);
-      }
-
-      // 通路線の描画
-      ctx.strokeStyle = "#333";
-      ctx.beginPath();
-      // 各階内の線
-      ctx.moveTo(...nodes["1F"].A);
-      ctx.lineTo(...nodes["1F"].Stair);
-      ctx.moveTo(...nodes["2F"].B);
-      ctx.lineTo(...nodes["2F"].Stair);
-      ctx.moveTo(...nodes["3F"].C);
-      ctx.lineTo(...nodes["3F"].Stair);
-      // 垂直の階段線
-      ctx.moveTo(...nodes["1F"].Stair);
-      ctx.lineTo(...nodes["2F"].Stair);
-      ctx.lineTo(...nodes["3F"].Stair);
-      ctx.stroke();
-
-      // ノード点を描く
-      ctx.fillStyle = "#ff5555";
-      for (const f in nodes) {
-        for (const n in nodes[f]) {
-          const [x, y] = nodes[f][n];
-          ctx.beginPath();
-          ctx.arc(x, y, 5, 0, Math.PI * 2);
-          ctx.fill();
-          ctx.fillText(`${n}`, x + 10, y - 5);
-        }
-      }
-    }
-
-    drawMap();
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
