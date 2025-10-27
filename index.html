@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>校内経路ナビ（デモ）</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <h1>🏫 校内経路ナビ（仮想）</h1>
+
+  <div class="form-area">
+    <label for="start">現在地：</label>
+    <select id="start"></select>
+
+    <label for="end">目的地：</label>
+    <select id="end"></select>
+
+    <button id="find-route">経路を表示</button>
+  </div>
+
+  <div id="result"></div>
+
+  <canvas id="mapCanvas" width="500" height="500"></canvas>
+
+  <!-- ✅ スクリプトは「最後」に置くのが大事！ -->
+  <script src="script.js"></script>
+</body>
+</html>

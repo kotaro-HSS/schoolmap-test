@@ -1,0 +1,27 @@
+body {
+  font-family: "Segoe UI", sans-serif;
+  background-color: #f7f9fc;
+  color: #333;
+  text-align: center;
+  margin: 20px;
+}
+
+h1 {
+  color: #0078d7;
+}
+
+.form-area {
+  margin: 15px 0;
+}
+
+select, button {
+  margin: 5px;
+  padding: 6px;
+  font-size: 14px;
+}
+
+#mapCanvas {
+  border: 2px solid #0078d7;
+  margin-top: 20px;
+  background-color: #fff;
+}
